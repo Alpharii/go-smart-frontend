@@ -3,17 +3,17 @@ import { defineStore } from "pinia";
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
-        token: null as string | null,
+        token: "",
         user: null as object | null,
         isLoading: false,
         error: null as string | null,
     }),
 
     actions:{
-        async login(){
+        async login(email: string, password: string) {
             await axiosClient.post('/login', {
-                username: 'test',
-                password: 'test'
+                email: email,
+                password: password
             }).then((response) => {
                 this.token = response.data.token;
                 this.user = response.data.user;
