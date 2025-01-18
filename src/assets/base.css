@@ -1,5 +1,5 @@
 :root {
-  --color-background: #181818; /* warna hitam */
+  --color-background: #1e1e1e; /* warna hitam */
   --color-background-soft: #222222; /* warna hitam lembut */
   --color-background-mute: #282828; /* warna hitam lebih lembut */
 
@@ -10,19 +10,9 @@
   --color-text: rgba(235, 235, 235, 0.64); /* warna teks */
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  font-weight: normal;
-}
-
 body {
-  min-height: 100vh;
   color: var(--color-text);
   background: var(--color-background);
-  line-height: 1.6;
   font-family:
     Inter,
     -apple-system,
@@ -37,7 +27,4 @@ body {
     'Helvetica Neue',
     sans-serif;
   font-size: 15px;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
