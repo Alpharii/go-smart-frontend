@@ -8,8 +8,11 @@ interface LoginValues {
 
 interface RegisterValues {
     email: string;
+    username: string;
     password: string;
+    role: string;
 }
+
 export const handleLogin = async ({ email, password }: LoginValues) => {
     try {
         const config = {
@@ -30,7 +33,7 @@ export const handleLogin = async ({ email, password }: LoginValues) => {
     }
 };
 
-export const handleRegister = async ({ email, password }: RegisterValues) => {
+export const handleRegister = async ({ email, password, role, username }: RegisterValues) => {
     try {
         const config = {
             headers: {
@@ -40,6 +43,8 @@ export const handleRegister = async ({ email, password }: RegisterValues) => {
         const body = JSON.stringify({
             email,
             password,
+            role,
+            username,
         });
         const response = await ApiAuth.Register(body, config);
         return response.data || {};

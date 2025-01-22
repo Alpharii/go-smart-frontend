@@ -1,28 +1,48 @@
-import axiosClient from '@/api/axiosClient'
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia";
+import { ref } from "vue";
 
-export const useAuthStore = defineStore('auth', {
-  state: () => ({
-    token: '',
-    user: null as object | null,
-    isLoading: false,
-    error: null as string | null,
-  }),
+export interface AuthState {
+  user_id: number | null;
+  token: string;
+  role: string;
+  isAuth: boolean;
+}
 
-  actions: {
-    async login(email: string, password: string) {
-      await axiosClient
-        .post('/login', {
-          email: email,
-          password: password,
-        })
-        .then((response) => {
-          this.token = response.data.token
-          this.user = response.data.user
-          this.isLoading = false
-          this.error = null
-          localStorage.setItem('token', this.token)
-        })
-    },
-  },
-})
+const initialState: AuthState = {
+  user_id: null,
+  token: "",
+  role: "user",
+  isAuth: false,
+};
+
+export const useAuthStore = defineStore("auth", () => {
+  const auth = ref<AuthState>({ ...initialState });
+
+  // Actions
+  const setAuth = (payload: AuthState) => {
+    auth.value = { ...payload };
+    localStorage.setItem("auth", JSON.stringify(payload));
+  };
+
+  const removeAuth = () => {
+    auth.value = { ...initialState };
+    localStorage.removeItem("auth");
+  };
+
+  // Persist state on initialization (optional)
+  const initAuth = () => {
+    const savedAuth = localStorage.getItem("auth");
+    if (savedAuth) {
+      auth.value = JSON.parse(savedAuth);
+    }
+  };
+
+  // Call initialization function when the store is created
+  initAuth();
+
+  return {
+    auth,
+    setAuth,
+    removeAuth,
+  };
+});

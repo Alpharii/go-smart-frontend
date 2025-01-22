@@ -3,7 +3,7 @@ import dataHandler from "./dataHandler";
 import errorHandler from "./errorHandler";
 
 const Axios: AxiosInstance = axios.create({
-    baseURL: `${import.meta.env.VITE_URL_SERVER}/api/v1` as string,
+    baseURL: `${import.meta.env.VITE_URL_SERVER}` as string,
 });
 
 Axios.interceptors.response.use(
