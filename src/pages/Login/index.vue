@@ -55,7 +55,7 @@
         Belum Login? <a href="#" class="text-blue-500 hover:underline">Register Disini</a>
       </p>
       <button
-        style="background-color: #2E2E2E;"
+        style="background-color: #2e2e2e"
         class="mt-4 w-full max-w-sm hover:bg-gray-600 border border-black text-white font-semibold py-2 lg:px-24 rounded-2xl focus:ring-2 focus:ring-gray-500 focus:outline-none"
       >
         REGISTER
