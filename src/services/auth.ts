@@ -13,6 +13,15 @@ interface RegisterValues {
     role: string;
 }
 
+interface CustomError {
+    message: string;
+    response?: {
+        data: {
+            message: string;
+        };
+    };
+}
+
 export const handleLogin = async ({ email, password }: LoginValues) => {
     try {
         const config = {
@@ -23,13 +32,14 @@ export const handleLogin = async ({ email, password }: LoginValues) => {
         const body = JSON.stringify({ email, password });
         const response = await ApiAuth.Login(body, config);
         return response?.data || {};
-    } catch (error: any) {
+    } catch (error) {
+        const axiosError = error as CustomError; // Cast error ke AxiosError
         Swal.fire({
             icon: "error",
             title: "Login error",
-            text: error?.response?.data?.message || "Something went wrong",
+            text: axiosError?.response?.data?.message || "Something went wrong",
         });
-        return console.error("Login error:", error);
+        console.error("Login error:", axiosError);
     }
 };
 
@@ -48,12 +58,13 @@ export const handleRegister = async ({ email, password, role, username }: Regist
         });
         const response = await ApiAuth.Register(body, config);
         return response.data || {};
-    } catch (error: any) {
+    } catch (error) {
+        const axiosError = error as CustomError; // Cast error ke AxiosError
         Swal.fire({
             icon: "error",
             title: "Register error",
-            text: error?.response?.data?.message || "Something went wrong",
+            text: axiosError?.response?.data?.message || "Something went wrong",
         });
-        return console.error("Login error:", error);
+        console.error("Register error:", axiosError);
     }
 };
