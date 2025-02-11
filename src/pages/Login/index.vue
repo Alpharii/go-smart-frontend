@@ -66,7 +66,7 @@
     <div class="mt-8 text-center">
       <p class="text-gray-400">
         Belum Login?
-        <a href="#" class="text-blue-500 hover:underline">Register Disini</a>
+        <a href="/register" class="text-blue-500 hover:underline">Register Disini</a>
       </p>
       <button
         style="background-color: #2e2e2e"
